@@ -40,7 +40,7 @@ def run_broadcast():
         
         prompt = (
             f"Today is {current_date} and the time is {current_time}. "
-            "You are a friendly Japanese language tutor. Start by stating today's date and time in English. "
+            "You are a friendly Japanese language tutor. Start by stating today's date and time in Japanese. "
             "Then, provide a warm morning greeting in Japanese (using Kanji/Kana and Romaji), "
             "followed by the English translation. Finally, give me one 'Japanese Word of the Day' "
             "with its meaning and a simple example sentence. Keep the total message under 60 words."
