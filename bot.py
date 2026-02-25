@@ -29,11 +29,26 @@ def wait_until_target():
 
 def run_broadcast():
     try:
-        # 1. Generate Content with Gemini 2.0/3.0 SDK
+        # Get current time in Bangkok for the prompt
+        tz = pytz.timezone('Asia/Bangkok')
+        now = datetime.now(tz)
+        current_date = now.strftime("%A, %d %B %Y")
+        current_time = now.strftime("%I:%M %p")
+
+        # 1. Generate Content with Gemini 2.5 Flash
         client = genai.Client(api_key=os.getenv('GEMINI_API_KEY'))
+        
+        prompt = (
+            f"Today is {current_date} and the time is {current_time}. "
+            "You are a friendly Japanese language tutor. Start by stating today's date and time in English. "
+            "Then, provide a warm morning greeting in Japanese (using Kanji/Kana and Romaji), "
+            "followed by the English translation. Finally, give me one 'Japanese Word of the Day' "
+            "with its meaning and a simple example sentence. Keep the total message under 60 words."
+        )
+
         response = client.models.generate_content(
-            model='gemini-2.0-flash', 
-            contents="Write a short, warm, and unique morning greeting for today."
+            model='gemini-2.5-flash', 
+            contents=prompt
         )
         msg_text = response.text.strip()
 
