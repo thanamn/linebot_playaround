@@ -1,0 +1,3 @@
+google-genai
+line-bot-sdk
+pytz

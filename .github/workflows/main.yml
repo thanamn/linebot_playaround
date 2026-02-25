@@ -1,0 +1,29 @@
+name: Daily AI Broadcast Bot
+
+on:
+  schedule:
+    # 01:50 UTC is 08:50 AM Bangkok (UTC+7)
+    - cron: '50 1 * * *'
+  workflow_dispatch: # Allows you to click "Run workflow" for an instant test
+
+jobs:
+  broadcast_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Bot
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+        run: python bot.py
