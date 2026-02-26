@@ -1,8 +1,10 @@
 name: Daily Japanese AI Bot
 
 on:
-  schedule:
-    - cron: '50 1 * * *'
+  # This is the new part: Listening for the external ping
+  repository_dispatch:
+    types: [morning_ping]
+  # Keep this so you can still test it manually
   workflow_dispatch: 
 
 permissions:
