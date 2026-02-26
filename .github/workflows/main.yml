@@ -3,7 +3,7 @@ name: Daily Japanese AI Bot
 on:
   schedule:
     # 01:50 UTC is 08:50 AM Bangkok (UTC+7)
-    - cron: '50 1 * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch: 
 
 jobs:
